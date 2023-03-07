@@ -7,11 +7,8 @@ public class Bank {
 	private static int accountNumbers=100;
 	private static int statementID = 1;
 	private static int id=1;
-	public Bank(String s) {
-		this.accounts = accounts;
-	}
 	
-	public static String openAccount(String firstName, String lastName, String SSN, int overdraft, String accountType) {
+	public String openAccount(String firstName, String lastName, String SSN, int overdraft, String accountType) {
 		Person customer=new Person(id++, firstName, lastName,SSN);
 		Account account=new Account(accountNumbers++, accountType, overdraft, customer, "Open");
 		accounts.add(account);
@@ -121,7 +118,6 @@ public class Bank {
 			
 
 			if(acc.getAccountNumber() == accountNumber) {
-				double balance = acc.getBalance();
 				acc.setAccountStatus("Closed");
 				if(acc.getBalance()>0){
 					acc.setOverDraft(0);

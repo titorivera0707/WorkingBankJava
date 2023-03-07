@@ -48,7 +48,7 @@ public class Statements {
 
     @Override
     public String toString() {
-        return transID + " : " + debCred + " : $" + amount;
+        return transID + " : " + debCred + " : $" + String.format("%.2f",amount);
     }
 
 }

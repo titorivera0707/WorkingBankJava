@@ -70,7 +70,7 @@ public class Account {
 	
 	
 	public String toString() {
-		return "\n"+this.accountNumber+" : "+type+" : "+this.balance+" : "+this.accountHolder.toString()+" : Account "+this.accountStatus;
+		return "\n"+this.accountNumber+" : "+type+" : $" + String.format("%.2f", this.balance) + " : "+this.accountHolder.toString()+" : Account "+this.accountStatus;
 	}
 
 }

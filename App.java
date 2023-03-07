@@ -10,9 +10,7 @@ public class App {
 
         do {
 
-            Person person = new Person(0, null, null, null);
-            Account account = new Account(0, null, 0, null, null);
-            Bank newBank = new Bank(null);
+            Bank newBank = new Bank();
 
             try{
 
@@ -39,13 +37,11 @@ public class App {
                     String SSN = keyboard.nextLine();
                     System.out.print("Enter overdraft limit: ");
                     int overdraft = keyboard.nextInt();
-                    keyboard.nextLine();
                     //Overdraft Protection once I have basic function.
                     String accountType = "Checking";
-                    person.setFirstName(fName);
                     
 
-                    System.out.println(newBank.openAccount(fName, lName, SSN, overdraft, accountType));;
+                    System.out.println(newBank.openAccount(fName, lName, SSN, overdraft, accountType));
 
                 }
                 if(userChoice == 2){
@@ -59,7 +55,6 @@ public class App {
                     String SSN = keyboard.nextLine();
                     //Overdraft Protection once I have basic function.
                     String accountType = "Savings";
-                    person.setFirstName(fName);
                     int overdraft = 0;
 
                     newBank.openAccount(fName, lName, SSN, overdraft, accountType);
@@ -75,7 +70,7 @@ public class App {
                     int accountNumber = keyboard.nextInt();
 
                     newBank.printStatement(accountNumber);
-                    System.out.println("\n\n Balance: $" + newBank.getAccountBalance(accountNumber));
+                    System.out.println("\n\n Balance: $" + String.format("%.2f", newBank.getAccountBalance(accountNumber)));
 
                     
                 }
@@ -113,6 +108,7 @@ public class App {
             }
 
         }while(userChoice>0 && userChoice<8);
+        keyboard.close();
         
     }
 }

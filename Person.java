@@ -6,13 +6,11 @@ public class Person {
 	private String emailAddress;
 	private String SSN;
 	private int id;
-	private static int idCounter = 1;
 	
 	//Constructors
 	public Person(int id, String firstName, String lastName, String SSN) {
 		this.firstName=firstName;
 		this.lastName=lastName;
-		this.emailAddress=emailAddress;
 		this.SSN=SSN;
 		this.id=id;
 	}
