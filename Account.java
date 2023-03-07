@@ -3,19 +3,20 @@ public class Account {
 
     private int accountNumber;
 	private String type;
-	private boolean accountOpen;
+	private String accountStatus;
 	private double balance;
 	private Person accountHolder;
 	private int overDraft;
 	
 	//Constructor
-	public Account(int accountNumber, String type, int overDraft, Person accountHolder) {
+	public Account(int accountNumber, String type, int overDraft, Person accountHolder, String accountStatus) {
 		this.accountNumber = accountNumber;
 		this.type = type;
 		this.overDraft = overDraft;
 		this.accountHolder = accountHolder;
+		this.accountStatus = accountStatus;
 		balance = 0;
-		accountOpen=true;
+		accountStatus = "Open";
 	}
 	
 	public void setAccountNumber(int accountNumber) {
@@ -42,37 +43,25 @@ public class Account {
 		return type;
 	}
 
-	public boolean isAccountOpen() {
-		return accountOpen;
-	}
-
 	public Person getAccountHolder() {
 		return accountHolder;
+	}
+
+	public void setOverDraft(int overDraft) {
+		this.overDraft = overDraft;
 	}
 
 	public int getOverDraft() {
 		return overDraft;
 	}
+	
+	
+	public String getAccountStatus() {
+		return accountStatus;
+	}
 
-	public boolean withdraw(double amount) {
-		if(this.balance-amount<0) return false;
-		this.balance=this.balance-amount;
-		return true;
-	}
-	
-	public boolean deposit(double amount) {
-		if(amount<0 || !isOpen()) return false;
-		this.balance=this.balance+amount;
-		return true;
-		
-	}
-	
-	public boolean isOpen() {
-		return this.accountOpen;
-	}
-	
-	public void closeAccount() {
-		this.accountOpen=false;
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 	
 	public double getBalance() {
@@ -81,7 +70,7 @@ public class Account {
 	
 	
 	public String toString() {
-		return "\n"+this.accountNumber+":"+type+":"+this.balance+":"+overDraft+":["+this.accountHolder.toString()+"]";
+		return "\n"+this.accountNumber+" : "+type+" : "+this.balance+" : "+this.accountHolder.toString()+" : Account "+this.accountStatus;
 	}
 
 }

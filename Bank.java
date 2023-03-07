@@ -3,17 +3,19 @@ import java.util.ArrayList;
 
 public class Bank {
 	private static ArrayList<Account> accounts=new ArrayList<Account>();
+	private static ArrayList<Statements> statements = new ArrayList<Statements>();
 	private static int accountNumbers=100;
+	private static int statementID = 1;
 	private static int id=1;
 	public Bank(String s) {
 		this.accounts = accounts;
 	}
 	
-	public static Account openAccount(String firstName, String lastName, String SSN, int overdraft, String accountType) {
+	public static String openAccount(String firstName, String lastName, String SSN, int overdraft, String accountType) {
 		Person customer=new Person(id++, firstName, lastName,SSN);
-		Account account=new Account(accountNumbers++, accountType, overdraft, customer);
+		Account account=new Account(accountNumbers++, accountType, overdraft, customer, "Open");
 		accounts.add(account);
-		return account;
+		return "Thank you, the account number is: " + (accountNumbers-1);
 
 	}
 	
@@ -25,20 +27,36 @@ public class Bank {
 
 	}	
 	
+	public void printStatement(int accountNumber) {
+
+		  for(Account acc: accounts) {
+
+			if(acc.getAccountNumber() == accountNumber) {
+
+				for(Statements states: statements) {
+
+					if(states.getAccNumber() == accountNumber) {
+						System.out.println(states);
+					}
+
+				}
+
+			}
+
+		  }
+
+	}
 	
-	//The following methods must be implemented
-	
-	
-	public Account findAccount(int accountNumber) {
+	public double getAccountBalance(int accountNumber) {
 		
 		for(Account acc: accounts) {
 
 			if(acc.getAccountNumber() == accountNumber) {
-				return acc;
+				return acc.getBalance();
 			}
 
 		}
-		return null;
+		return 0;
 	}
 	
 	
@@ -47,7 +65,14 @@ public class Bank {
 		for(Account acc: accounts) {
 
 			if(acc.getAccountNumber() == accountNumber) {
-				if((acc.getBalance()+acc.getOverDraft()) > amount){
+				if(acc.getAccountStatus().equals("Closed")&&(acc.getBalance()<0)){
+					System.out.println("Account closed, only deposits allowed.");
+				}
+
+				else if((acc.getBalance()+acc.getOverDraft()) > amount){
+					Statements newStatement = new Statements(statementID, "debit", amount, accountNumber);
+					statements.add(newStatement);
+					statementID++;
 					amount = acc.getBalance() - amount;
 					acc.setBalance(amount);
 				return "Withdraw Successful, new balance is " + amount;
@@ -71,6 +96,9 @@ public class Bank {
 
 			if(acc.getAccountNumber() == accountNumber) {
 				if(amount>0){
+					Statements newStatement = new Statements(statementID, "credit", amount, accountNumber);
+					statements.add(newStatement);
+					statementID++;
 					amount = acc.getBalance() + amount;
 					acc.setBalance(amount);
 				return "Deposit Successful, new balance is " + amount;
@@ -89,17 +117,22 @@ public class Bank {
     	
 	public String closeAccount(int accountNumber) {
 
-		int x =0;
 		for(Account acc: accounts) {
 			
 
 			if(acc.getAccountNumber() == accountNumber) {
 				double balance = acc.getBalance();
-				accounts.remove(x);
-				if(balance < 0)return "The bank is now $" + balance + " poorer.";
-				else return "The bank is now $" + balance + " richer. Thank you.";
+				acc.setAccountStatus("Closed");
+				if(acc.getBalance()>0){
+					acc.setOverDraft(0);
+					return "Account closed, current balance is $" + acc.getBalance() + ", deposits no longer allowed.";
+				}
+				else if(acc.getBalance()<0) {
+					acc.setOverDraft(0);
+					return "Account closed, current balance is $" + acc.getBalance() + ", withdrawals no longer allowed.";
+				}
+				else{return "Account closed, no deposits or withdrawals allowed.";}
 			}
-			x++;
 		}
 		return "Account not found.";
 

@@ -11,7 +11,7 @@ public class App {
         do {
 
             Person person = new Person(0, null, null, null);
-            Account account = new Account(0, null, 0, null);
+            Account account = new Account(0, null, 0, null, null);
             Bank newBank = new Bank(null);
 
             try{
@@ -45,7 +45,7 @@ public class App {
                     person.setFirstName(fName);
                     
 
-                    newBank.openAccount(fName, lName, SSN, overdraft, accountType);
+                    System.out.println(newBank.openAccount(fName, lName, SSN, overdraft, accountType));;
 
                 }
                 if(userChoice == 2){
@@ -74,7 +74,8 @@ public class App {
                     System.out.print("Enter an account number: ");
                     int accountNumber = keyboard.nextInt();
 
-                    System.out.println(newBank.findAccount(accountNumber));
+                    newBank.printStatement(accountNumber);
+                    System.out.println("\n\n Balance: $" + newBank.getAccountBalance(accountNumber));
 
                     
                 }
