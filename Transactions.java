@@ -1,13 +1,11 @@
-
-
-public class Statements {
+public class Transactions {
 
     private int transID;
     private String debCred;
     private double amount;
     private int accNumber;
 
-    public Statements(int transID, String debCred, double amount, int accNumber) {
+    public Transactions(int transID, String debCred, double amount, int accNumber) {
         this.transID = transID;
         this.debCred = debCred;
         this.amount = amount;

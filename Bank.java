@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class Bank {
 	private static ArrayList<Account> accounts=new ArrayList<Account>();
-	private static ArrayList<Statements> statements = new ArrayList<Statements>();
+	private static ArrayList<Transactions> transactions = new ArrayList<Transactions>();
 	private static int accountNumbers=100;
-	private static int statementID = 1;
+	private static int transactionID = 1;
 	private static int id=1;
 	
 	public String openAccount(String firstName, String lastName, String SSN, int overdraft, String accountType) {
@@ -30,7 +30,7 @@ public class Bank {
 
 			if(acc.getAccountNumber() == accountNumber) {
 
-				for(Statements states: statements) {
+				for(Transactions states: transactions) {
 
 					if(states.getAccNumber() == accountNumber) {
 						System.out.println(states);
@@ -67,9 +67,9 @@ public class Bank {
 				}
 
 				else if((acc.getBalance()+acc.getOverDraft()) > amount){
-					Statements newStatement = new Statements(statementID, "debit", amount, accountNumber);
-					statements.add(newStatement);
-					statementID++;
+					Transactions newStatement = new Transactions(transactionID, "debit", amount, accountNumber);
+					transactions.add(newStatement);
+					transactionID++;
 					amount = acc.getBalance() - amount;
 					acc.setBalance(amount);
 				return "Withdraw Successful, new balance is " + amount;
@@ -93,9 +93,9 @@ public class Bank {
 
 			if(acc.getAccountNumber() == accountNumber) {
 				if(amount>0){
-					Statements newStatement = new Statements(statementID, "credit", amount, accountNumber);
-					statements.add(newStatement);
-					statementID++;
+					Transactions newStatement = new Transactions(transactionID, "credit", amount, accountNumber);
+					transactions.add(newStatement);
+					transactionID++;
 					amount = acc.getBalance() + amount;
 					acc.setBalance(amount);
 				return "Deposit Successful, new balance is " + amount;

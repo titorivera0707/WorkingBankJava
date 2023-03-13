@@ -3,7 +3,6 @@ public class Person {
 
     private String firstName;
 	private String lastName;
-	private String emailAddress;
 	private String SSN;
 	private int id;
 	
@@ -25,10 +24,6 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
 	public void setSSN(String SSN) {
 		this.SSN = SSN;
 	}
@@ -44,9 +39,7 @@ public class Person {
 	public String getLastName() {
 		return lastName;
 	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
+	
 	public String getSSN() {
 		return SSN;
 	}
