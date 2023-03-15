@@ -15,7 +15,7 @@ public class App {
             try{
 
                 System.out.println("1 - Open a checking account\n2 - Open Savings Account\n3 - List Accounts\n4 - Account Statement");
-                System.out.println("5 - Deposit Funds\n6 - Withdraw Funds\n7 - Close an account\n8 - Exit");
+                System.out.println("5 - Deposit Funds\n6 - Withdraw Funds\n7 - Close an account\n8 - Save Transactions\n9 - Exit");
                 System.out.print("Choose an option: ");
                 userChoice = keyboard.nextInt();
                 keyboard.nextLine();
@@ -101,13 +101,17 @@ public class App {
                     System.out.println(newBank.closeAccount(accountNumber));
                     
                 }
+                if(userChoice == 8) {
+                    newBank.saveFile();
+                    System.out.println();
+                }
 
             }catch(Exception e) {}
             finally{
                 //System.out.println(newBank);
             }
 
-        }while(userChoice>0 && userChoice<8);
+        }while(userChoice>0 && userChoice<9);
         keyboard.close();
         
     }
